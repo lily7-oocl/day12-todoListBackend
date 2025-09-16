@@ -19,9 +19,6 @@ public class TodoService {
     }
 
     public Todo addTodo(TodoDto todoDto) {
-        if (todoDto.getText() == null || todoDto.getText().isEmpty()) {
-            throw new IllegalArgumentException("Unprocessable Entity");
-        }
         Todo todo = new Todo();
         BeanUtils.copyProperties(todoDto, todo);
         todo.setId(todoRepository.save(todo));
