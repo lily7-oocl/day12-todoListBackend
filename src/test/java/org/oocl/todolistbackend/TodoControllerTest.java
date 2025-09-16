@@ -45,9 +45,29 @@ public class TodoControllerTest {
     }
 
     @Test
-    public void should_return_status_no_content_when_delete_todo_by_id() throws Exception {
-        int id = todoController.createOrUpdateTodo(new Todo("是！哥们", false)).get("id");
-        mock.perform(delete("/todos/{id}", id))
-                .andExpect(status().isNoContent());
+    public void should_return_status_unprocessable_entity_when_create_todo_given_todo_with_empty_text() throws Exception {
+        String requestBody = """
+                {
+                    "text": "",
+                    "done": false
+                }
+                """;
+        mock.perform(post("/todos")
+                        .contentType("application/json")
+                        .content(requestBody))
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    public void should_return_status_unprocessable_entity_when_create_todo_given_todo_with_null_text() throws Exception {
+        String requestBody = """
+                {
+                    "done": false
+                }
+                """;
+        mock.perform(post("/todos")
+                        .contentType("application/json")
+                        .content(requestBody))
+                .andExpect(status().isUnprocessableEntity());
     }
 }

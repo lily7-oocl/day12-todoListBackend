@@ -2,7 +2,9 @@ package org.oocl.todolistbackend.service;
 
 import lombok.AllArgsConstructor;
 import org.oocl.todolistbackend.pojo.Todo;
+import org.oocl.todolistbackend.pojo.dto.TodoDto;
 import org.oocl.todolistbackend.repository.TodoRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +18,14 @@ public class TodoService {
         return todoRepository.getAll();
     }
 
-    public int createOrUpdateTodo(Todo todo) {
-        return todoRepository.save(todo);
+    public Todo addTodo(TodoDto todoDto) {
+        if (todoDto.getText() == null || todoDto.getText().isEmpty()) {
+            throw new IllegalArgumentException("Unprocessable Entity");
+        }
+        Todo todo = new Todo();
+        BeanUtils.copyProperties(todoDto, todo);
+        todo.setId(todoRepository.save(todo));
+        return todo;
     }
 
     public void deleteTodoById(int id) {

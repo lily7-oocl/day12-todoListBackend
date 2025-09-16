@@ -2,6 +2,7 @@ package org.oocl.todolistbackend.controller;
 
 import lombok.AllArgsConstructor;
 import org.oocl.todolistbackend.pojo.Todo;
+import org.oocl.todolistbackend.pojo.dto.TodoDto;
 import org.oocl.todolistbackend.service.TodoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +24,8 @@ public class TodoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Map<String, Integer> createOrUpdateTodo(@RequestBody Todo todo) {
-        int id = todoService.createOrUpdateTodo(todo);
-        return Map.of("id", id);
+    public Todo addTodo(@RequestBody TodoDto todo) {
+        return todoService.addTodo(todo);
     }
 
     @DeleteMapping("/{id}")
