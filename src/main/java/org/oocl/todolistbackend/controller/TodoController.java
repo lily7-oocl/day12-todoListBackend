@@ -41,7 +41,7 @@ public class TodoController {
     }
 
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public Todo getTodoById(@PathVariable int id) {
         return todoService.getTodoById(id);
     }

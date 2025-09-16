@@ -27,6 +27,7 @@ public class TodoService {
     }
 
     public void deleteTodoById(int id) {
+        getTodoById(id);
         todoRepository.deleteById(id);
     }
 

@@ -26,7 +26,7 @@ public class TodoControllerTest {
     @Test
     public void should_return_all_todos_when_get_all_todos() throws Exception {
         List<Todo> allTodos = todoController.getAllTodos();
-        mock.perform(get("/todos/all"))
+        mock.perform(get("/todos"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(allTodos.size()));
     }
@@ -115,5 +115,21 @@ public class TodoControllerTest {
                         .contentType("application/json")
                         .content(requestBody))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void should_return_status_not_found_when_delete_todo_given_invalid_id() throws Exception {
+        Todo todo = todoController.addTodo(new TodoDto("是！哥们", false));
+        mock.perform(delete("/todos/{id}", todo.getId()+999))
+                .andExpect(status().isNotFound());
+
+    }
+
+    @Test
+    public void should_return_status_no_content_when_delete_todo_given_valid_id() throws Exception {
+        Todo todo = todoController.addTodo(new TodoDto("是！哥们", false));
+        mock.perform(delete("/todos/{id}", todo.getId()))
+                .andExpect(status().isNoContent());
+
     }
 }
