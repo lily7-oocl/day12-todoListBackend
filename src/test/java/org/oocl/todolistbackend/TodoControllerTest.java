@@ -74,4 +74,18 @@ public class TodoControllerTest {
                         .content(requestBody))
                 .andExpect(status().isUnprocessableEntity());
     }
+
+    @Test
+    public void should_return_not_found_when_update_todo_given_todo_id_not_exist() throws Exception {
+        String requestBody = """
+                {
+                    "text": "是！哥们",
+                    "done": false
+                }
+                """;
+        mock.perform(put("/todos/999")
+                        .contentType("application/json")
+                        .content(requestBody))
+                .andExpect(status().isNotFound());
+    }
 }

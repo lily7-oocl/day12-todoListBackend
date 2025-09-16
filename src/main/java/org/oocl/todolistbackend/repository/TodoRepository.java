@@ -10,4 +10,8 @@ public interface TodoRepository {
     int save(Todo todo);
 
     void deleteById(int id);
+
+    void updateById(Todo todo);
+
+    Todo getById(int id);
 }

@@ -16,7 +16,7 @@ import java.util.Map;
 public class TodoController {
     private TodoService todoService;
 
-    @GetMapping("/all")
+    @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
     public List<Todo> getAllTodos() {
         return todoService.getAllTodos();
@@ -32,5 +32,17 @@ public class TodoController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTodoById(@PathVariable int id) {
         todoService.deleteTodoById(id);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateTodoById(@RequestBody TodoDto todo, @PathVariable int id) {
+        todoService.updateTodoById(todo, id);
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Todo getTodoById(@PathVariable int id) {
+        return todoService.getTodoById(id);
     }
 }
