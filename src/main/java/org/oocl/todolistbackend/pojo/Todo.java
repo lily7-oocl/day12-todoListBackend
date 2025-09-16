@@ -18,4 +18,8 @@ public class Todo {
     private int id;
     private String text;
     private boolean done;
+    public Todo(String text, boolean done) {
+        this.text = text;
+        this.done = done;
+    }
 }

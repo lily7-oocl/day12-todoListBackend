@@ -27,4 +27,10 @@ public class TodoController {
         int id = todoService.createOrUpdateTodo(todo);
         return Map.of("id", id);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteTodoById(@PathVariable int id) {
+        todoService.deleteTodoById(id);
+    }
 }

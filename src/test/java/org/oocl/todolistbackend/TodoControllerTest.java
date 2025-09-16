@@ -10,8 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -43,5 +42,12 @@ public class TodoControllerTest {
                         .contentType("application/json")
                         .content(requestBody))
                 .andExpect(status().isCreated());
+    }
+
+    @Test
+    public void should_return_status_no_content_when_delete_todo_by_id() throws Exception {
+        int id = todoController.createOrUpdateTodo(new Todo("是！哥们", false)).get("id");
+        mock.perform(delete("/todos/{id}", id))
+                .andExpect(status().isNoContent());
     }
 }

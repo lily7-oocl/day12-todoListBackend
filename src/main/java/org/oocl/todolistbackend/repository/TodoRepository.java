@@ -8,4 +8,6 @@ public interface TodoRepository {
     List<Todo> getAll();
 
     int save(Todo todo);
+
+    void deleteById(int id);
 }

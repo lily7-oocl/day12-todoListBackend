@@ -22,4 +22,9 @@ public class TodoRepositoryImpl implements TodoRepository {
     public int save(Todo todo) {
         return todoDao.save(todo).getId();
     }
+
+    @Override
+    public void deleteById(int id) {
+        todoDao.deleteById((long) id);
+    }
 }
