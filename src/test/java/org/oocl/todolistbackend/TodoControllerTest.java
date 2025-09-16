@@ -41,7 +41,11 @@ public class TodoControllerTest {
         mock.perform(post("/todos")
                         .contentType("application/json")
                         .content(requestBody))
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").isNumber())
+                .andExpect(jsonPath("$.text").value("是！哥们"))
+                .andExpect(jsonPath("$.done").value(false));
+
     }
 
     @Test
