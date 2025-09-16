@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface TodoRepository {
     List<Todo> getAll();
+
+    int save(Todo todo);
 }

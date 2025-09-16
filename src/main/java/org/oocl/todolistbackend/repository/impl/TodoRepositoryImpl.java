@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.oocl.todolistbackend.pojo.Todo;
 import org.oocl.todolistbackend.repository.TodoRepository;
 import org.oocl.todolistbackend.repository.dao.TodoDao;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,5 +16,10 @@ public class TodoRepositoryImpl implements TodoRepository {
     @Override
     public List<Todo> getAll() {
         return todoDao.findAll();
+    }
+
+    @Override
+    public int save(Todo todo) {
+        return todoDao.save(todo).getId();
     }
 }

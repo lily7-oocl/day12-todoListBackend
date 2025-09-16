@@ -3,12 +3,12 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/todo?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/todo_db?useUnicode=true&characterEncoding=utf8
     username: root
     password: Q2AYA2n46a68*mi
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
