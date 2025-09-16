@@ -118,6 +118,22 @@ public class TodoControllerTest {
     }
 
     @Test
+    public void should_return_status_ok_when_update_todo_given_valid_todo_and_multiple_id() throws Exception {
+        String requestBody = """
+                {
+                    "id": 456,
+                    "text": "是！哥们",
+                    "done": false
+                }
+                """;
+        Todo todo = todoController.addTodo(new TodoDto("是！哥们", false));
+        mock.perform(put("/todos/{id}", todo.getId())
+                        .contentType("application/json")
+                        .content(requestBody))
+                .andExpect(status().isOk());
+    }
+
+    @Test
     public void should_return_status_no_content_when_delete_todo_given_valid_id() throws Exception {
         Todo todo = todoController.addTodo(new TodoDto("是！哥们", false));
         mock.perform(delete("/todos/{id}", todo.getId()))
