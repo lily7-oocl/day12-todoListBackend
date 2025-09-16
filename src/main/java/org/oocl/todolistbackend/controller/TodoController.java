@@ -23,8 +23,8 @@ public class TodoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Map<String, Integer> createTodo(@RequestBody Todo todo) {
-        int id = todoService.createTodo(todo);
+    public Map<String, Integer> createOrUpdateTodo(@RequestBody Todo todo) {
+        int id = todoService.createOrUpdateTodo(todo);
         return Map.of("id", id);
     }
 }

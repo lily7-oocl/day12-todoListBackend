@@ -16,7 +16,7 @@ public class TodoService {
         return todoRepository.getAll();
     }
 
-    public int createTodo(Todo todo) {
+    public int createOrUpdateTodo(Todo todo) {
         return todoRepository.save(todo);
     }
 }
