@@ -20,7 +20,7 @@ public class TodoService {
     }
 
     public Todo addTodo(TodoDto todoDto) {
-        Todo todo = new Todo();
+        Todo todo = Todo.builder().build();
         BeanUtils.copyProperties(todoDto, todo);
         todo.setId(todoRepository.save(todo));
         return todo;
@@ -36,7 +36,7 @@ public class TodoService {
             throw new TodoUnprocessableEntityException("Unprocessable Entity");
         }
         getTodoById(id);
-        Todo todo = new Todo();
+        Todo todo = Todo.builder().build();
         BeanUtils.copyProperties(todoDto, todo);
         todo.setId(id);
         todoRepository.updateById(todo);
