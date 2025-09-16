@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Todo {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotEmpty(message = "Unprocessable Entity")
     @NotNull(message = "Unprocessable Entity")
