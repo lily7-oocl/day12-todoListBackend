@@ -156,4 +156,11 @@ public class TodoControllerTest {
                 .andExpect(jsonPath("$.text").value("是！哥们"))
                 .andExpect(jsonPath("$.done").value(false));
     }
+
+    @Test
+    public void should_return_not_found_when_get_todo_given_invalid_id() throws Exception {
+        Todo todo = todoController.addTodo(new TodoDto("是！哥们", false));
+        mock.perform(get("/todos/{id}", todo.getId()+999))
+                .andExpect(status().isNotFound());
+    }
 }
