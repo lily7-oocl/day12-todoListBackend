@@ -3,6 +3,7 @@ package org.oocl.todolistbackend;
 import org.junit.jupiter.api.Test;
 import org.oocl.todolistbackend.controller.TodoController;
 import org.oocl.todolistbackend.pojo.Todo;
+import org.oocl.todolistbackend.pojo.dto.TodoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -99,5 +100,20 @@ public class TodoControllerTest {
                         .contentType("application/json")
                         .content(requestBody))
                 .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    public void should_return_status_ok_when_update_todo_given_valid_todo_and_id() throws Exception {
+        String requestBody = """
+                {
+                    "text": "是！哥们",
+                    "done": false
+                }
+                """;
+        Todo todo = todoController.addTodo(new TodoDto("是！哥们", false));
+        mock.perform(put("/todos/{id}", todo.getId())
+                        .contentType("application/json")
+                        .content(requestBody))
+                .andExpect(status().isOk());
     }
 }
