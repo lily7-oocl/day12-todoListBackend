@@ -36,6 +36,6 @@ public class TodoRepositoryImpl implements TodoRepository {
 
     @Override
     public Todo getById(int id) {
-        return todoDao.findById((long) id).orElseThrow(()->new TodoNotFoundException("Not Found"));
+        return todoDao.findById((long) id).orElseThrow(() -> new TodoNotFoundException("Not Found"));
     }
 }
