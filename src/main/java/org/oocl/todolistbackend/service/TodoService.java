@@ -31,7 +31,7 @@ public class TodoService {
     }
 
     public void updateTodoById(TodoDto todoDto, int id) {
-        if (todoDto == null) {
+        if (todoDto == null || todoDto.getText() == null ||todoDto.getText().isEmpty() || todoDto.getText().trim().isEmpty() || todoDto.getDone() == null) {
             throw new TodoUnprocessableEntityException("Unprocessable Entity");
         }
         getTodoById(id);

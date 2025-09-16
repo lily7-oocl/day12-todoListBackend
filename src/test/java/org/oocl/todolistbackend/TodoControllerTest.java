@@ -88,4 +88,16 @@ public class TodoControllerTest {
                         .content(requestBody))
                 .andExpect(status().isNotFound());
     }
+
+    @Test
+    public void should_return_status_unprocessable_entity_when_update_todo_given_todo_is_empty() throws Exception {
+        String requestBody = """
+                {
+                }
+                """;
+        mock.perform(put("/todos/123")
+                        .contentType("application/json")
+                        .content(requestBody))
+                .andExpect(status().isUnprocessableEntity());
+    }
 }

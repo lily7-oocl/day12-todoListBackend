@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class TodoDto {
     private String text;
-    private boolean done;
+    private Boolean done;
 }
