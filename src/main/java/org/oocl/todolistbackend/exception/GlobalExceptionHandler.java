@@ -6,6 +6,7 @@ import org.oocl.todolistbackend.exception.todo.TodoNotFoundException;
 import org.oocl.todolistbackend.exception.todo.TodoUnprocessableEntityException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -27,5 +28,11 @@ public class GlobalExceptionHandler {
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public String handleValidationException(MethodArgumentNotValidException e) {
+        return e.getMessage();
     }
 }

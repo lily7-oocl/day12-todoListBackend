@@ -1,5 +1,6 @@
 package org.oocl.todolistbackend.controller;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.oocl.todolistbackend.pojo.Todo;
 import org.oocl.todolistbackend.pojo.dto.TodoDto;
@@ -23,7 +24,7 @@ public class TodoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Todo addTodo(@RequestBody TodoDto todo) {
+    public Todo addTodo(@Valid @RequestBody TodoDto todo) {
         return todoService.addTodo(todo);
     }
 
@@ -35,7 +36,7 @@ public class TodoController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateTodoById(@RequestBody TodoDto todo, @PathVariable int id) {
+    public void updateTodoById(@Valid @RequestBody TodoDto todo, @PathVariable int id) {
         todoService.updateTodoById(todo, id);
     }
 
