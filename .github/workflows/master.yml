@@ -1,4 +1,4 @@
-name: Main Branch CI/CD to Dev
+name: Master Branch CI/CD to Dev
 
 on:
   push:
@@ -36,13 +36,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
       - name: Run tests
-        run: ./gradlew test
+        run: ./gradlew test --continue
 
       - name: Generate test report
         uses: dorny/test-reporter@v1
-        if: success() || failure()
+        if: always()  # 改为 always() 确保即使测试失败也会生成报告
         with:
           name: "[Report] JUnit Tests Report"
-          path: build/test-results/test/*.xml
+          path: '**/build/test-results/test/*.xml'  # 使用通配符匹配路径
           reporter: java-junit
+          fail-on-error: false  # 添加这个选项，避免因报告问题导致 workflow 失败
